@@ -304,13 +304,8 @@
           </label>
           <label>
             Guests
-            <select name="guests" required>
-              <option value="">Select guests</option>
-              <option>2 guests</option>
-              <option>3-4 guests</option>
-              <option>5-8 guests</option>
-              <option>Private function</option>
-            </select>
+            <input type="number" name="guests" min="1" max="10" placeholder="1-10 guests" required />
+            <span class="field-hint">For more than 10 guests, please add details in the note.</span>
           </label>
           <label>
             Message

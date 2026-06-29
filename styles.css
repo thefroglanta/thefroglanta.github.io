@@ -703,6 +703,13 @@ textarea {
   font: inherit;
 }
 
+.field-hint {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
 textarea {
   resize: vertical;
 }
