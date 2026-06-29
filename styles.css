@@ -161,7 +161,7 @@ p {
   inset: 0;
   content: "";
   background:
-    linear-gradient(90deg, rgba(9, 24, 12, 0.9), rgba(9, 24, 12, 0.58) 46%, rgba(9, 24, 12, 0.18)),
+    linear-gradient(90deg, rgba(9, 24, 12, 0.92), rgba(9, 24, 12, 0.62) 38%, rgba(9, 24, 12, 0.18) 70%, rgba(9, 24, 12, 0.06)),
     linear-gradient(0deg, rgba(9, 24, 12, 0.36), rgba(9, 24, 12, 0.04));
 }
 
@@ -185,7 +185,7 @@ p {
 
 .hero-content {
   position: relative;
-  max-width: 700px;
+  width: min(100%, 980px);
   padding: clamp(58px, 8vw, 112px) clamp(20px, 5vw, 76px);
   color: var(--white);
 }
@@ -239,9 +239,17 @@ h2 {
 }
 
 h1 {
-  max-width: 760px;
+  max-width: 920px;
   margin-bottom: 20px;
-  font-size: clamp(2.35rem, 5.2vw, 4.45rem);
+  font-size: clamp(2.35rem, 4.4vw, 4rem);
+}
+
+h1 span {
+  display: block;
+}
+
+h1 span:last-child {
+  max-width: 920px;
 }
 
 h2 {
@@ -785,6 +793,10 @@ textarea {
     font-size: clamp(2.1rem, 13vw, 3.2rem);
     line-height: 1.06;
   }
+
+  h1 span:last-child {
+    max-width: 100%;
+   }
 
   h2 {
     font-size: clamp(1.55rem, 9vw, 2.35rem);
