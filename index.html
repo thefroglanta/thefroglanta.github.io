@@ -288,11 +288,15 @@
             <a class="secondary-button facebook-button" href="https://www.facebook.com/profile.php?id=100054449981097" target="_blank" rel="noreferrer">Facebook</a>
           </div>
         </div>
-        <form class="booking-card" id="reserve" aria-label="Table booking form">
+        <form class="booking-card" id="reserve" data-booking-endpoint="https://script.google.com/macros/s/AKfycbw3GrAz607im19oc-UattQuwv2-nxBhMqmTBVB8JIaUBsts6bJ_wBxDZDc9cp9O-3n0zw/exec" aria-label="Table booking form">
           <h2>Book a table</h2>
           <label>
             Name
             <input type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label>
+            Phone or email
+            <input type="text" name="contact" placeholder="Phone, email, WhatsApp, or LINE" required />
           </label>
           <label>
             Date
@@ -312,8 +316,8 @@
             Message
             <textarea name="message" rows="3" placeholder="Arrival time, wine, allergies, kids seats"></textarea>
           </label>
-          <button class="primary-button" type="submit">Prepare booking message</button>
-          <p class="form-note" data-booking-note>We will create a ready-to-send booking message.</p>
+          <button class="primary-button" type="submit">Send booking request</button>
+          <p class="form-note" data-booking-note>Add your booking details and we will notify the restaurant.</p>
         </form>
       </section>
     </main>
