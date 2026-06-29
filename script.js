@@ -49,16 +49,30 @@ if (foodGallery && foodSlides.length > 1 && !prefersReducedMotion) {
 }
 
 if (bookingForm && bookingNote) {
-  bookingForm.addEventListener("submit", (event) => {
+  bookingForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    const endpoint = bookingForm.dataset.bookingEndpoint;
     const formData = new FormData(bookingForm);
-    const name = formData.get("name");
-    const date = formData.get("date");
-    const guests = formData.get("guests");
-    const message = formData.get("message") || "No special note";
 
-    bookingNote.textContent =
-      `Booking message: Hi, my name is ${name}. I would like to book a table on ${date} for ${guests}. Note: ${message}.`;
+    if (!endpoint) {
+      bookingNote.textContent = "Booking notifications are not connected yet. Please call 084 443 2138.";
+      return;
+    }
+
+    bookingNote.textContent = "Sending your booking request...";
+
+    try {
+      await fetch(endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      });
+
+      bookingForm.reset();
+      bookingNote.textContent = "Thank you. Your booking request has been sent to The Frog.";
+    } catch (error) {
+      bookingNote.textContent = "Sorry, the message could not be sent. Please call 084 443 2138.";
+    }
   });
 }
