@@ -52,6 +52,11 @@ if (bookingForm && bookingNote) {
   bookingForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    if (!bookingForm.reportValidity()) {
+      bookingNote.textContent = "Please complete every field before sending.";
+      return;
+    }
+
     const endpoint = bookingForm.dataset.bookingEndpoint;
     const formData = new FormData(bookingForm);
 
