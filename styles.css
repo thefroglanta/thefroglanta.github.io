@@ -277,6 +277,43 @@ h2 {
   margin-top: 28px;
 }
 
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.social-link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.social-link img { display: block; }
+.social-link:hover { background: var(--fern); }
+.social-link:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+
+.social-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 9px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--white);
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.social-link:hover .social-tooltip,
+.social-link:focus-visible .social-tooltip { opacity: 1; }
+
 .hero-dots span {
   width: 26px;
   height: 4px;
