@@ -292,11 +292,19 @@
           <h2>Book a table</h2>
           <label>
             Name
-            <input type="text" name="name" placeholder="Your name" required />
+            <input type="text" name="name" placeholder="Your name" maxlength="80" autocomplete="name" required />
           </label>
           <label>
             Phone or email
-            <input type="text" name="contact" placeholder="Phone, email, WhatsApp, or LINE" required />
+            <input
+              type="text"
+              name="contact"
+              placeholder="Phone, email, WhatsApp, or LINE"
+              maxlength="120"
+              autocomplete="email"
+              pattern="[A-Za-z0-9ก-๙@._+\\-\\s()/#:]{3,120}"
+              required
+            />
           </label>
           <label>
             Date
@@ -309,7 +317,7 @@
           </label>
           <label>
             Message
-            <textarea name="message" rows="3" placeholder="Arrival time, wine, allergies, kids seats" required></textarea>
+            <textarea name="message" rows="3" placeholder="Arrival time, wine, allergies, kids seats" maxlength="500" required></textarea>
           </label>
           <button class="primary-button" type="submit">Send booking request</button>
           <p class="form-note" data-booking-note>Add your booking details and we will notify the restaurant.</p>

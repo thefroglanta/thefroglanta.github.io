@@ -6,6 +6,12 @@ const foodGallery = document.querySelector(".food-gallery");
 const foodSlides = foodGallery ? [...foodGallery.querySelectorAll("figure")] : [];
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const cleanInput = (value, maxLength) =>
+  String(value || "")
+    .replace(/[\u0000-\u001f\u007f<>]/g, "")
+    .trim()
+    .slice(0, maxLength);
+
 if (heroSlides.length > 1 && !prefersReducedMotion) {
   let activeHeroSlide = 0;
 
@@ -58,7 +64,20 @@ if (bookingForm && bookingNote) {
     }
 
     const endpoint = bookingForm.dataset.bookingEndpoint;
-    const formData = new FormData(bookingForm);
+    const rawFormData = new FormData(bookingForm);
+    const guests = Number(rawFormData.get("guests"));
+
+    if (!Number.isInteger(guests) || guests < 1 || guests > 10) {
+      bookingNote.textContent = "Please enter a guest number from 1 to 10.";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.set("name", cleanInput(rawFormData.get("name"), 80));
+    formData.set("contact", cleanInput(rawFormData.get("contact"), 120));
+    formData.set("date", cleanInput(rawFormData.get("date"), 10));
+    formData.set("guests", String(guests));
+    formData.set("message", cleanInput(rawFormData.get("message"), 500));
 
     if (!endpoint) {
       bookingNote.textContent = "Booking notifications are not connected yet. Please call 084 443 2138.";
