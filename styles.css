@@ -478,7 +478,8 @@ h2 {
 .video-frame {
   position: relative;
   overflow: hidden;
-  margin-top: 28px;
+  width: min(100%, 800px);
+  margin: 28px auto 0;
   aspect-ratio: 16 / 9;
   background: var(--garden);
   border: 1px solid rgba(88, 119, 56, 0.24);
