@@ -510,6 +510,14 @@ h2 {
   height: 260px;
 }
 
+.experience-grid .garden-photo {
+  object-position: 50% 68%;
+}
+
+.experience-grid .live-music-photo {
+  object-position: center top;
+}
+
 .experience-grid div {
   padding: 22px;
 }
