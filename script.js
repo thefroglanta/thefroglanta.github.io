@@ -117,13 +117,14 @@ if (bookingForm && bookingNote) {
       await fetch(endpoint, {
         method: "POST",
         mode: "no-cors",
-        body: formData,
+        // Apps Script parses URL-encoded fields consistently; multipart is rejected.
+        body: new URLSearchParams(formData),
       });
 
       // An opaque response does not confirm acceptance by Apps Script.
       nextSubmissionAt = Date.now() + 60000;
       startedAt = Date.now();
-      bookingNote.textContent = "Request submitted. Please wait for the restaurant to confirm your booking. For assistance, call 084 443 2138.";
+      bookingNote.textContent = "Request sent for processing; delivery is not yet confirmed. Please wait for the restaurant to confirm, or call 084 443 2138.";
     } catch (error) {
       bookingNote.textContent = "Sorry, the message could not be sent. Please call 084 443 2138.";
     } finally {
