@@ -56,6 +56,27 @@ if (foodGallery && foodSlides.length > 1 && !prefersReducedMotion) {
 
 if (bookingForm && bookingNote) {
   const submitButton = bookingForm.querySelector('button[type="submit"]');
+  const emailInput = bookingForm.elements.namedItem("email");
+  const emailError = document.querySelector("#booking-email-error");
+  const validateEmail = () => {
+    emailInput.setCustomValidity("");
+    const value = emailInput.value.trim();
+    const message = !value
+      ? "Please enter your email address."
+      : emailInput.validity.typeMismatch || !/^[^\s@<>]+@[^\s@<>.]+(?:\.[^\s@<>.]+)+$/.test(value)
+        ? "Please enter a valid email address, for example name@example.com."
+        : "";
+    emailInput.setCustomValidity(message);
+    emailInput.setAttribute("aria-invalid", String(Boolean(message)));
+    emailError.textContent = message;
+    return !message;
+  };
+  emailInput.addEventListener("input", validateEmail);
+  emailInput.addEventListener("blur", () => {
+    emailInput.value = emailInput.value.trim();
+    validateEmail();
+  });
+  emailInput.addEventListener("invalid", validateEmail);
   let startedAt = Date.now();
   let sending = false;
   let nextSubmissionAt = 0;
@@ -68,8 +89,9 @@ if (bookingForm && bookingNote) {
       return;
     }
 
+    validateEmail();
     if (!bookingForm.reportValidity()) {
-      bookingNote.textContent = "Please complete every field before sending.";
+      bookingNote.textContent = "Please check your email and complete all required fields.";
       return;
     }
 
@@ -92,12 +114,17 @@ if (bookingForm && bookingNote) {
 
     const formData = new FormData();
     formData.set("name", cleanInput(rawFormData.get("name"), 80));
-    formData.set("contact", cleanInput(rawFormData.get("contact"), 120));
+    const email = String(rawFormData.get("email") || "").trim();
+    const phone = cleanInput(rawFormData.get("phone"), 32);
+    formData.set("email", email);
+    formData.set("phone", phone);
+    // Keep contact populated for the existing Apps Script deployment.
+    formData.set("contact", phone ? `${email} | ${phone}` : email);
     formData.set("date", cleanInput(rawFormData.get("date"), 10));
     formData.set("guests", String(guests));
     formData.set("message", cleanInput(rawFormData.get("message"), 500));
-    if (["name", "contact", "date", "message"].some((key) => !formData.get(key))) {
-      bookingNote.textContent = "Please complete every field with valid details.";
+    if (["name", "email", "date", "message"].some((key) => !formData.get(key))) {
+      bookingNote.textContent = "Please complete all required fields with valid details.";
       return;
     }
     formData.set("website", "");

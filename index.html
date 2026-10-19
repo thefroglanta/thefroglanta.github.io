@@ -297,15 +297,18 @@
             <input type="text" name="name" placeholder="Your name" maxlength="80" autocomplete="name" required />
           </label>
           <label>
-            Phone or email
+            Email
+            <input type="email" name="email" placeholder="name@example.com" maxlength="80" autocomplete="email" autocapitalize="none" spellcheck="false" aria-describedby="booking-email-error" required />
+            <span id="booking-email-error" class="field-hint" aria-live="polite"></span>
+          </label>
+          <label>
+            Phone (optional)
             <input
-              type="text"
-              name="contact"
-              placeholder="Phone, email, WhatsApp, or LINE"
-              maxlength="120"
-              autocomplete="email"
-              minlength="3"
-              required
+              type="tel"
+              name="phone"
+              placeholder="Your phone number"
+              maxlength="32"
+              autocomplete="tel"
             />
           </label>
           <label>
@@ -332,6 +335,6 @@
       <span>Saladan, Koh Lanta, Krabi, Thailand</span>
     </footer>
 
-    <script src="script.js?v=20261009-booking-encoding"></script>
+    <script src="script.js?v=20261019-booking-email"></script>
   </body>
 </html>
